@@ -14,7 +14,6 @@ userSchema.statics.findByLogin = async function (login) {
     if (!user) {
         user = await this.findOne({ email:login });
     }
-
     return user;
 }
 
