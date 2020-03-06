@@ -24,11 +24,10 @@ router.get('/:conversationId', async (req, res) => {
         .catch(err => {
             console.log(err);
         });
-        const mapText = async function (id) {
+        var thread = await Promise.all(conversation.messages.map(async id => {
             const message = await req.context.models.Message.findById(id);
             return message.text;
-        }
-        const thread = await conversation.messages.map(mapText);
+        }));
         return res.send(thread);
     }
     return res.send([]);
