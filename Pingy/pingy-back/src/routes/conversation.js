@@ -22,8 +22,7 @@ router.get('/:conversationId', async (req, res) => {
             .then(async conversation => {
                 var thread = await Promise.all(conversation.messages.map(async id => {
                     const message = await req.context.models.Message.findById(id);
-                    console.log(message)
-                    return message.text;
+                    return message;
                 }));
                 return res.send(thread);
                 //return res.send(conversation);
@@ -48,7 +47,7 @@ router.post('/:conversationId', async (req, res) => {
                 user: req.context.me.id,
                 text: req.body.text
             });
-            message.save();
+            await message.save();
             req.context.models.Conversation.updateOne(
                 {"_id": req.params.conversationId}, 
                 {"$push" : {"messages": message}},

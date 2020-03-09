@@ -93,4 +93,4 @@ connectDb().then(async () => {
     app.listen(process.env.PORT, () => {
         console.log(`Express app listening on port ${process.env.PORT}`);
     });
-});
+}).catch(err => {console.log(err);});

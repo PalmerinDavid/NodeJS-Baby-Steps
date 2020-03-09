@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
                 }
             }
         }
-    }).find((error, results) => {
+    }).catch(error => {
         if (error) console.log(error);
     });
 
